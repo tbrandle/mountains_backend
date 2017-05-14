@@ -1,0 +1,81 @@
+body, html {
+  height: 100%;
+}
+
+body * {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/************ header ***********/
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2a1f30;
+}
+
+.logo {
+  font-weight: 300;
+}
+
+.logo,
+.student-name {
+  margin: 10px;
+  color: #d1d2d3;
+  font-size: 18px;
+}
+
+.logo-span {
+  color: #34d1d1;
+}
+
+
+/************ accordian section ***********/
+
+.accordian-wrapper{
+  width: 75%;
+  margin: 15px auto;
+  border: 1px lightgrey solid;
+}
+
+.tabs-section{
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgrey;
+}
+
+.tab{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: 100%;
+}
+
+.tab-content{
+  display: flex;
+  justify-content: space-between;
+}
+
+.img{
+  width: 60%;
+  margin: 20px;
+  background-color: lightgrey;
+  border: 1px grey solid;
+
+}
+
+.content {
+  width: 100%;
+  padding: 13px 20px;
+}
+
+.title {
+  font-weight: 600;
+  border-bottom: 1px lightgrey solid;
+  padding-bottom: 13px;
+}
+
+.selected-tab {
+  background-color: white;
+}
