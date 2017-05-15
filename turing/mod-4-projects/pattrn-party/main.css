@@ -51,6 +51,13 @@ body * {
   margin: 20px 0;
 }
 
+.accordian-wrapper:after{
+  content: '';
+  height: 74vh;
+  display: flex;
+  width: 100%;
+}
+
   /******** tab-section *******/
 
 .tabs-section{
@@ -124,8 +131,6 @@ article[hidden]{
   /******** button / pseudo *******/
 
 .view-source {
-  position: absolute;
-  bottom: 10px;
   background-color: #2F2235;
   color: #D1D2D3;
   width: 138px;
@@ -147,6 +152,9 @@ button:hover{
  ************************************/
 
 @media (max-width: 814px) {
+  .accordian-wrapper:after{
+    height: 0px;
+  }
   .header{
     flex-direction: column;
     align-items: center;
