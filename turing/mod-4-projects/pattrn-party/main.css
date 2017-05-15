@@ -1,3 +1,7 @@
+/*************************************
+              GENERAL
+*************************************/
+
 body, html {
   height: 100%;
 }
@@ -6,7 +10,9 @@ body * {
   font-family: 'Open Sans', sans-serif;
 }
 
-/************ header ***********/
+/*************************************
+              HEADER
+ ************************************/
 
 .header {
   display: flex;
@@ -16,9 +22,11 @@ body * {
 
 .logo {
   font-weight: 300;
+  margin: 10px;
+  color: #d1d2d3;
+  font-size: 18px;
 }
 
-.logo,
 .student-name {
   margin: 10px;
   color: #d1d2d3;
@@ -30,18 +38,26 @@ body * {
 }
 
 
-/************ accordian section ***********/
+/*************************************
+            ACCORDIAN SECTION
+ ************************************/
 
 .accordian-wrapper{
   width: 75%;
   margin: 15px auto;
-  border: 1px lightgrey solid;
 }
 
+.accordian-title {
+  margin: 20px 0;
+}
+
+  /******** tab-section *******/
+
 .tabs-section{
+  position: relative;
   display: flex;
   justify-content: space-between;
-  background-color: lightgrey;
+  background-color: #F2F2F2;
 }
 
 .tab{
@@ -50,19 +66,48 @@ body * {
   align-items: center;
   height: 36px;
   width: 100%;
+  color: #D1D2D3;
+  border: 1px white solid;
+  border-bottom: none;
+}
+
+span, article{
+  pointer-events: none;
+}
+
+.selected-tab {
+  background-color: white;
+  color: #666666;
+  border: 1px #D1D2D3 solid;
+  border-bottom: none;
+}
+
+  /******** tab-content *******/
+
+
+article[hidden]{
+  display: none;
 }
 
 .tab-content{
+  position: absolute;
   display: flex;
+  top: 36px;
+  left: 0;
+  width: 74.8vw;
   justify-content: space-between;
+  align-items: center;
+  border: 1px #D1D2D3 solid;
+  border-top: none;
+  background-color: white;
 }
 
 .img{
-  width: 60%;
+  width: 280px;;
+  height: 100%;
   margin: 20px;
-  background-color: lightgrey;
-  border: 1px grey solid;
-
+  background-color: #F2F2F2;
+  border: 1px #D1D2D3 solid;
 }
 
 .content {
@@ -70,12 +115,86 @@ body * {
   padding: 13px 20px;
 }
 
-.title {
+.article-title {
   font-weight: 600;
   border-bottom: 1px lightgrey solid;
   padding-bottom: 13px;
 }
 
-.selected-tab {
-  background-color: white;
+  /******** button / pseudo *******/
+
+.view-source {
+  background-color: #2F2235;
+  color: #D1D2D3;
+  width: 138px;
+  height: 38px;
+  border: none;
+  margin: 50px 43%;
+}
+
+.tab:hover{
+  cursor: pointer;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+/*************************************
+            MEDIA QUERIES
+ ************************************/
+
+@media (max-width: 814px) {
+  .header{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo{
+    font-size: 34px;
+    margin-bottom: 0;
+  }
+
+  .tabs-section{
+    flex-direction: column;
+    border: 1px #D1D2D3 solid;
+  }
+
+  .tab{
+    justify-content: space-between;
+    padding: 28px;
+    font-size: 24px;
+    flex-grow: 1;
+    box-sizing: border-box;
+  }
+  .selected-tab{
+    display: block;
+    height: 100%;
+    padding: 0;
+    padding-top: 13px;
+    border: none;
+  }
+
+  .selected-tab .tab-title{
+    padding-left: 28px;
+  }
+
+  .tab-content{
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 24px;
+    position: inherit;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+  }
+
+  .content{
+    padding: 10px 25px;
+    box-sizing: border-box;
+  }
+  .img{
+    margin: 0;
+    width: 100%;
+  }
 }

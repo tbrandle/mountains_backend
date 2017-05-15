@@ -13,19 +13,59 @@
       <h1 class="student-name">Tim Brandle</h1>
     </header>
     <section class="accordian-wrapper">
+      <div class="accordian-title">Accordian Tabs</div>
+
       <section class="tabs-section">
-        <div class="tab selected-tab">Tab 1</div>
-        <div class="tab">Tab 2</div>
-        <div class="tab">Tab 3</div>
-        <div class="tab">Tab 4</div>
-      </section>
-      <section class="tab-content">
-        <div class="img"></div>
-        <div class="content">
-          <p class="title">Lorem ipsum dolor sit amet, consectetur</p>
-          <p class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div name="tab-1" class="tab selected-tab">
+          <span class="tab-title">Tab 1</span>
+          <article id="tab-1" class="tab-content">
+          <img class="img" src="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg"></img>
+          <div class="content">
+            <p class="article-title">tab 1: Lorem ipsum dolor sit amet, consectetur</p>
+            <p class="article-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </article>
         </div>
+        <div name="tab-2" class="tab">
+          <span class="tab-title">Tab 2</span>
+          <article hidden id="tab-2" class="tab-content">
+          <img class="img" src="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg"></img>
+          <div class="content">
+            <p class="article-title">tab 2: Lorem ipsum dolor sit amet, consectetur</p>
+            <p class="article-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </article>
+        </div>
+        <div name="tab-3" class="tab">
+          <span class="tab-title">Tab 3</span>
+          <article hidden id="tab-3" class="tab-content">
+          <img class="img" src="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg"></img>
+          <div class="content">
+            <p class="article-title">tab 3: Lorem ipsum dolor sit amet, consectetur</p>
+            <p class="article-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </article>
+        </div>
+        <div name="tab-4" class="tab">
+          <span class="tab-title">Tab 4</span>
+          <article hidden id="tab-4" class="tab-content">
+          <img class="img" src="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg"></img>
+          <div class="content">
+            <p class="article-title">tab 4: Lorem ipsum dolor sit amet, consectetur</p>
+            <p class="article-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </article>
+        </div>
+
+
+
+
       </section>
+
+
     </section>
+    <button class="view-source">View Source</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
