@@ -68,7 +68,7 @@ body * {
   width: 100%;
   color: #D1D2D3;
   border: 1px white solid;
-  border-bottom: none;
+  border-bottom-color: #D1D2D3;
 }
 
 span, article{
@@ -79,7 +79,7 @@ span, article{
   background-color: white;
   color: #666666;
   border: 1px #D1D2D3 solid;
-  border-bottom: none;
+  border-bottom-color: white
 }
 
   /******** tab-content *******/
@@ -92,7 +92,7 @@ article[hidden]{
 .tab-content{
   position: absolute;
   display: flex;
-  top: 36px;
+  top: 38px;
   left: 0;
   width: 74.8vw;
   justify-content: space-between;
@@ -124,6 +124,8 @@ article[hidden]{
   /******** button / pseudo *******/
 
 .view-source {
+  position: absolute;
+  bottom: 10px;
   background-color: #2F2235;
   color: #D1D2D3;
   width: 138px;
@@ -166,7 +168,9 @@ button:hover{
     font-size: 24px;
     flex-grow: 1;
     box-sizing: border-box;
+    border-bottom-color: white;
   }
+
   .selected-tab{
     display: block;
     height: 100%;
