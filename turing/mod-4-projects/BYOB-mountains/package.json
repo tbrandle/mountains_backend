@@ -1,0 +1,26 @@
+{
+  "name": "BYOB-mountains",
+  "version": "1.0.0",
+  "description": "",
+  "main": "knexfile.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha",
+    "start": "node server.js",
+    "convert": "node ./helpers/convert_csv.js",
+    "clean": "node ./helpers/data_cleaner.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "csvtojson": "^1.1.5",
+    "mocha": "^3.4.1"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "knex": "^0.13.0",
+    "pg": "^6.2.2"
+  }
+}
