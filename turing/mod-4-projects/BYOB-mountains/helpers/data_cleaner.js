@@ -12,21 +12,19 @@ const keysToLowerCase = (array) => {
   })
 }
 
-const sortByRange = (array) => {
-  return array.sort((a, b) =>{
-      if (a.range.toUpperCase() < b.range.toUpperCase()) {
-        return -1;
-      }
-      if (a.range.toUpperCase() > b.range.toUpperCase()) {
-        return 1;
-      }
-  })
+const reduceByRange = (array) => {
+  return array.reduce((obj, mountain) => {
+    const key = mountain.range
+    !obj[key] && (obj[key] = [])
+    obj[key].push(mountain)
+    return obj
+  },{})
 }
 
-const cleanArray = (array) => {
-  const lowerCaseMountains = keysToLowerCase(array)
-  const sortedArray = sortByRange(lowerCaseMountains)
-  return sortedArray
+const cleanArray = (data) => {
+  const lowerCaseMountains = keysToLowerCase(data.mountains)
+  const reducedArray = reduceByRange(lowerCaseMountains)
+  return reducedArray;
 }
 
 module.exports = cleanArray;
