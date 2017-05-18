@@ -78,12 +78,12 @@ app.post('/api/v1/ranges', (req, res) => {
 
 /********** PATCH ************/
 
-// app.patch('/api/v1/1/ranges', (req, res) => {
-//   const range = req.body
-//   database('range')where('id' === req.params.id).insert(range, 'id')
-//   .then(range => res.status(201).json({ id: range[0] }))
-//   .catch(error => console.log(error))
-// })
+app.patch('/api/v1/mountains', (req, res) => {
+  const { mountain, id } = req.body
+  database('mountains').where('id', id).update({ mountain })
+  .then(mountain => res.status(202).json(mountain))
+  .catch(error => console.log(error))
+})
 
 
 // app.patch('/api/v1/')
@@ -91,9 +91,7 @@ app.post('/api/v1/ranges', (req, res) => {
 /********** DELETE ************/
 
 app.delete('/api/v1/mountains', (req, res) => {
-  console.log(req.body.id);
   database('mountains').where('id', req.body.id).del()
-    .then(mountain => console.log(mountain))
     .catch(error => console.log(error))
 })
 
