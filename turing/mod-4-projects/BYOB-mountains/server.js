@@ -23,9 +23,17 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/v1/mountains', (req, res) => {
-  database('mountains').select()
-    .then(mountains => res.status(200).json(mountains))
-    .catch(error => console.log(error))
+  const heightQuery = req.query.height_ft
+  if (heightQuery) {
+    database('mountains').where('height_ft', heightQuery).orWhere('height_ft', '>', heightQuery).select()
+      .then(mountains => res.status(200).json(mountains))
+      .catch(error => console.log(error))
+  } else {
+    database('mountains').select()
+      .then(mountains => res.status(200).json(mountains))
+      .catch(error => console.log(error))
+  }
+
 })
 
 app.get('/api/v1/ranges', (req, res) => {
@@ -35,6 +43,7 @@ app.get('/api/v1/ranges', (req, res) => {
 })
 
 app.get('/api/v1/:id/mountain', (req, res) => {
+  console.log(req.params);
   database('mountains').where('id', req.params.id).select()
     .then(mountain => res.status(200).json(mountain))
     .catch(error => console.log(error))
@@ -45,6 +54,8 @@ app.get('/api/v1/:id/mountain_range', (req, res) => {
     .then(range => res.status(200).json(range))
     .catch(error => console.log(error))
 })
+
+
 
 /********** POST ************/
 
@@ -68,13 +79,14 @@ app.post('/api/v1/ranges', (req, res) => {
 
 /********** PATCH ************/
 
-// app.post('/api/v1/:id/ranges', (req, res) => {
+// app.patch('/api/v1/1/ranges', (req, res) => {
 //   const range = req.body
 //   database('range')where('id' === req.params.id).insert(range, 'id')
 //   .then(range => res.status(201).json({ id: range[0] }))
 //   .catch(error => console.log(error))
 // })
-//
+
+
 // app.patch('/api/v1/')
 
 
