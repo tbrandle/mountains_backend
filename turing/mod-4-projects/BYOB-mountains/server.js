@@ -33,7 +33,6 @@ app.get('/api/v1/mountains', (req, res) => {
       .then(mountains => res.status(200).json(mountains))
       .catch(error => console.log(error))
   }
-
 })
 
 app.get('/api/v1/ranges', (req, res) => {
@@ -89,7 +88,14 @@ app.post('/api/v1/ranges', (req, res) => {
 
 // app.patch('/api/v1/')
 
+/********** DELETE ************/
 
+app.delete('/api/v1/mountains', (req, res) => {
+  console.log(req.body.id);
+  database('mountains').where('id', req.body.id).del()
+    .then(mountain => console.log(mountain))
+    .catch(error => console.log(error))
+})
 
 
 module.exports = app;
