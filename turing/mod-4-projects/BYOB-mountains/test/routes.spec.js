@@ -26,7 +26,6 @@ describe('test data_cleaner functions', () => {
     const firstKey = Object.keys(cleanMountainObject)[0]
     cleanMountainObject[firstKey][0].should.have.property('range')
     cleanMountainObject[firstKey].should.have.length(3)
-    console.log(cleanMountainObject);
   })
 
 

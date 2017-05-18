@@ -5,12 +5,10 @@ const cleanMountainObject = cleanArray(mountains)
 
 const insertMountain = (knex, mountain, range_id) =>{
   const updatedMountain = Object.assign({}, mountain, { range_id: range_id })
-  console.log('updatedMountain: ', updatedMountain);
   return knex('mountains').insert(updatedMountain)
 }
 
 const createMountainPromise = (knex, mountains) => {
-  console.log(mountains[0].range);
   let rangeObject = { range: mountains[0].range };
   return knex.table('range')
     .insert(rangeObject)

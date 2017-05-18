@@ -13,10 +13,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "body-parser": "^1.17.1",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "csvtojson": "^1.1.5",
-    "mocha": "^3.4.1"
+    "mocha": "^3.4.1",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "express": "^4.15.2",
