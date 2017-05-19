@@ -2,5 +2,12 @@
     "extends": "airbnb-base",
     "plugins": [
         "import"
-    ]
+    ],
+    "rules":{
+      "no-throw-literal": 0,
+      "comma-dangle": 0,
+      "no-console": 0,
+      "consistent-return": 0,
+      "fatal": 0
+    }
 }

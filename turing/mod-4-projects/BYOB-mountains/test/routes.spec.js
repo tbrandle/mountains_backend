@@ -1,9 +1,11 @@
+eslint-env node, mocha
 process.env.NODE_ENV = 'test';
+
 
 const stubData = require('./stub.json');
 const cleanArray = require('../helpers/data_cleaner.js');
-
 const chai = require('chai');
+
 const should = chai.should();
 const chaiHttp = require('chai-http');
 const config = require('dotenv').config().parsed;
@@ -12,7 +14,6 @@ const server = require('../server');
 
 const configuration = require('../knexfile').test;
 const database = require('knex')(configuration);
-
 
 chai.use(chaiHttp);
 
@@ -218,7 +219,7 @@ describe('test server side routes', () => {
             response.body.success.should.equal(false);
             response.body.should.have.property('message');
             response.body.message.should.equal('Please enter a mountain range value');
-            done()
+            done();
           });
     });
   });

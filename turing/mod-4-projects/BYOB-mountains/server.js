@@ -144,7 +144,7 @@ app.post('/api/v1/mountains', checkAuth, (req, res) => {
   } else {
     res.status(422).send({
       success: false,
-      message: "Please include at least a mountain and a mountain range",
+      message: 'Please include at least a mountain and a mountain range'
     });
   }
 });
@@ -154,7 +154,7 @@ app.post('/api/v1/ranges', checkAuth, (req, res) => {
   if (range.range) {
     database('range').insert(range, 'id')
       .then(rangeId => res.status(201).json({ id: rangeId[0] }))
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error));
   } else {
     res.status(422).send({
       success: false,
