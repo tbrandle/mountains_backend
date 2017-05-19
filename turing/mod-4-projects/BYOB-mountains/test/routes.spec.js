@@ -138,7 +138,9 @@ describe('test server side routes', () => {
           })
           .end((err, response) => {
             response.should.have.status(201);
-            
+            response.body.should.be.a('object');
+            response.body.should.have.property('id');
+
             done();
           });
     });

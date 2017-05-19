@@ -132,11 +132,9 @@ app.post('/authenticate', (request, response) => {
 
 app.post('/api/v1/mountains', checkAuth, (req, res) => {
   const { mountain } = req.body;
-  console.log(mountain);
   if (mountain.mountain && mountain.range) {
     database('range').whereRaw('LOWER(range) LIKE ?', mountain.range.toLowerCase()).select()
       .then((rangeSelect) => {
-        console.log(rangeSelect);
         if (rangeSelect.length) {
           insertNewMountain(mountain, rangeSelect[0].id, res);
         } else {
