@@ -33,7 +33,7 @@ const checkAuth = (request, response, next) => {
       if (error) {
         return response.status(403).send({
           success: false,
-          message: 'Invalid authorization token.',
+          message: 'Invalid authorization token.'
         });
       }
       request.decoded = decoded;
@@ -62,7 +62,6 @@ const insertNewMountain = (mountain, rangeId, res) => {
       message: error.message,
     }));
 };
-
 
 app.get('/api/v1/mountains', (req, res) => {
   const heightQuery = req.query.height_ft;
@@ -133,9 +132,11 @@ app.post('/authenticate', (request, response) => {
 
 app.post('/api/v1/mountains', checkAuth, (req, res) => {
   const { mountain } = req.body;
+  console.log(mountain);
   if (mountain.mountain && mountain.range) {
     database('range').whereRaw('LOWER(range) LIKE ?', mountain.range.toLowerCase()).select()
       .then((rangeSelect) => {
+        console.log(rangeSelect);
         if (rangeSelect.length) {
           insertNewMountain(mountain, rangeSelect[0].id, res);
         } else {

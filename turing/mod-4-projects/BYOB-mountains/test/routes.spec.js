@@ -1,11 +1,12 @@
 process.env.NODE_ENV = 'test';
 
-const stubData = require('./stub.json')
-const cleanArray = require('../helpers/data_cleaner.js')
+const stubData = require('./stub.json');
+const cleanArray = require('../helpers/data_cleaner.js');
 
 const chai = require('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
+const config = require('dotenv').config().parsed;
 
 const server = require('../server');
 
@@ -19,17 +20,16 @@ chai.use(chaiHttp);
 describe('test data_cleaner functions', () => {
 
   it('should alphabatize the mountains array by reduce by mountain range', () => {
-    stubData.mountains[0].should.have.property('Range')
-    stubData.mountains[0].Range.should.equal("Mahalangur Himalaya")
-    const cleanMountainObject = cleanArray(stubData)
-    Object.keys(cleanMountainObject).length.should.equal(3)
+    stubData.mountains[0].should.have.property('Range');
+    stubData.mountains[0].Range.should.equal("Mahalangur Himalaya");
+    const cleanMountainObject = cleanArray(stubData);
+    Object.keys(cleanMountainObject).length.should.equal(3);
 
-    const firstKey = Object.keys(cleanMountainObject)[0]
-    cleanMountainObject[firstKey][0].should.have.property('range')
-    cleanMountainObject[firstKey].should.have.length(2)
-  })
-
-})
+    const firstKey = Object.keys(cleanMountainObject)[0];
+    cleanMountainObject[firstKey][0].should.have.property('range');
+    cleanMountainObject[firstKey].should.have.length(2);
+  });
+});
 
 describe('test server side routes', () => {
 
@@ -53,94 +53,94 @@ describe('test server side routes', () => {
       chai.request(server)
         .get('/sad/panda')
         .end((err, response) => {
-          response.should.have.status(404)
-          done()
-        })
-    })
-  })
+          response.should.have.status(404);
+          done();
+        });
+    });
+  });
 
   describe('GET Routes', () => {
     it('GET /api/v1/mountains', (done) => {
       chai.request(server)
         .get('/api/v1/mountains')
         .end((err, response) => {
-          response.should.have.status(200)
+          response.should.have.status(200);
           response.should.be.json;
           response.body.should.be.an.array;
-          response.body.length.should.equal(1)
-          Object.keys(response.body[0]).length.should.equal(13)
-          done()
-        })
-    })
+          response.body.length.should.equal(1);
+          Object.keys(response.body[0]).length.should.equal(13);
+          done();
+        });
+    });
 
     it('GET /api/v1/ranges', (done) => {
       chai.request(server)
         .get('/api/v1/ranges')
         .end((err, response) => {
-          response.should.have.status(200)
+          response.should.have.status(200);
           response.should.be.json;
           response.body.should.be.an.array;
-          response.body.length.should.equal(1)
-          Object.keys(response.body[0]).length.should.equal(2)
-          response.body[0].should.have.property('range')
-          response.body[0].should.have.property('id')
-          done()
-        })
-    })
+          response.body.length.should.equal(1);
+          Object.keys(response.body[0]).length.should.equal(2);
+          response.body[0].should.have.property('range');
+          response.body[0].should.have.property('id');
+          done();
+        });
+    });
 
     it('GET /api/v1/:id/mountain_range', (done) => {
       chai.request(server)
         .get('/api/v1/1/mountain_range')
         .end((err, response) => {
-          response.should.have.status(200)
+          response.should.have.status(200);
           response.should.be.json;
           response.body.should.be.an.array;
-          response.body.length.should.equal(1)
-          Object.keys(response.body[0]).length.should.equal(13)
-          response.body[0].should.have.property('range')
-          response.body[0].should.have.property('id')
-          response.body[0].should.have.property('mountain')
-          response.body[0].should.have.property('height_ft')
-          done()
-        })
-    })
+          response.body.length.should.equal(1);
+          Object.keys(response.body[0]).length.should.equal(13);
+          response.body[0].should.have.property('range');
+          response.body[0].should.have.property('id');
+          response.body[0].should.have.property('mountain');
+          response.body[0].should.have.property('height_ft');
+          done();
+        });
+    });
 
     it('GET /api/v1/:id/mountain', (done) => {
       chai.request(server)
         .get('/api/v1/123/mountain')
         .end((err, response) => {
-          response.should.have.status(200)
+          response.should.have.status(200);
           response.should.be.json;
           response.body.should.be.an.array;
-          response.body.length.should.equal(1)
-          Object.keys(response.body[0]).length.should.equal(13)
-          response.body[0].should.have.property('range')
-          response.body[0].should.have.property('id')
-          response.body[0].should.have.property('mountain')
-          response.body[0].should.have.property('height_ft')
-          done()
-        })
-    })
-  })
-
+          response.body.length.should.equal(1);
+          Object.keys(response.body[0]).length.should.equal(13);
+          response.body[0].should.have.property('range');
+          response.body[0].should.have.property('id');
+          response.body[0].should.have.property('mountain');
+          response.body[0].should.have.property('height_ft');
+          done();
+        });
+    });
+  });
 
 //  tests failing due to stubbed token in .env
   describe('POST Routes', () => {
     it('POST /api/v1/mountains', (done) => {
+      console.log(config.TOKEN);
         chai.request(server)
           .post('/api/v1/mountains')
-          .set('Authorization', process.env.TOKEN)
           .send({
-            mountain: "test mountain",
-            range: "mount something",
-            range_id: 4
+            mountain: {
+              mountain: 'test mountain',
+              range: 'Mahalangur Himalaya'
+            },
+            token: config.TOKEN
           })
           .end((err, response) => {
             response.should.have.status(201);
-            done()
-          })
-    })
-
-  })
-
-})
+            
+            done();
+          });
+    });
+  });
+});
