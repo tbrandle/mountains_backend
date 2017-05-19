@@ -3,7 +3,7 @@ exports.seed = function (knex, Promise) {
     .then(() => knex('range').del())
     .then(() => Promise.all([
       knex('range').insert({
-        range: 'Himalaya',
+        range: 'Mahalangur Himalaya',
         id: 1,
       }, 'id')
         .then(rangeId => knex('mountains').insert(
