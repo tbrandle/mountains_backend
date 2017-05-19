@@ -10,4 +10,9 @@ deployment:
   production:
     branch: master
     heroku:
-      appname: mountains-api 
+      appname: mountains-api
+
+  production:
+    branch: master
+    heroku:
+      appname: mountains-api
