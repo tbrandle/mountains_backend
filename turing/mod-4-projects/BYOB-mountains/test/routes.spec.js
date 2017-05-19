@@ -1,4 +1,4 @@
-eslint-env node, mocha
+/* eslint-disable */
 process.env.NODE_ENV = 'test';
 
 
