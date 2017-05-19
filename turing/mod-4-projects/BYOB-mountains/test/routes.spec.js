@@ -123,10 +123,9 @@ describe('test server side routes', () => {
     });
   });
 
-//  tests failing due to stubbed token in .env
   describe('POST Routes', () => {
-    it('POST /api/v1/mountains', (done) => {
-      console.log(config.TOKEN);
+
+    it('HAPPY POST /api/v1/mountains', (done) => {
         chai.request(server)
           .post('/api/v1/mountains')
           .send({
@@ -140,8 +139,86 @@ describe('test server side routes', () => {
             response.should.have.status(201);
             response.body.should.be.a('object');
             response.body.should.have.property('id');
+            chai.request(server)
+            .get('/api/v1/mountains')
+            .end((err, response) => {
+              response.should.have.status(200);
+              response.should.be.json;
+              response.body.should.be.a('array');
+              response.body.length.should.equal(2);
+              response.body[1].should.have.property('mountain');
+              response.body[1].mountain.should.equal('test mountain');
+              response.body[1].should.have.property('range');
+              response.body[1].range.should.equal('Mahalangur Himalaya');
+              done();
+            });
+          });
+    });
 
+    it('SAD POST /api/v1/mountains', (done) => {
+        chai.request(server)
+          .post('/api/v1/mountains')
+          .send({
+            mountain: {
+              mountain: 'test mountain'
+            },
+            token: config.TOKEN
+          })
+          .end((err, response) => {
+            response.should.have.status(422);
+            response.body.should.be.a('object');
+            response.body.should.have.property('success');
+            response.body.success.should.equal(false);
+            response.body.should.have.property('message');
+            response.body.message.should.equal('Please include at least a mountain and a mountain range');
             done();
+          });
+    });
+
+    it('HAPPY POST /api/v1/ranges', (done) => {
+        chai.request(server)
+          .post('/api/v1/ranges')
+          .send({
+            range: {
+              range: 'Gumdrops'
+            },
+            token: config.TOKEN
+          })
+          .end((err, response) => {
+            response.should.have.status(201);
+            response.body.should.be.a('object');
+            response.body.should.have.property('id');
+            chai.request(server)
+            .get('/api/v1/ranges')
+            .end((err, response) => {
+              response.should.have.status(200);
+              response.should.be.json;
+              response.body.should.be.a('array');
+              response.body.length.should.equal(2);
+              response.body[1].should.have.property('range');
+              response.body[1].range.should.equal('Gumdrops');
+              done();
+            });
+          });
+    });
+
+    it('SAD POST /api/v1/ranges', (done) => {
+        chai.request(server)
+          .post('/api/v1/ranges')
+          .send({
+            range: {
+              range: ''
+            },
+            token: config.TOKEN
+          })
+          .end((err, response) => {
+            response.should.have.status(422);
+            response.body.should.be.a('object');
+            response.body.should.have.property('success');
+            response.body.success.should.equal(false);
+            response.body.should.have.property('message');
+            response.body.message.should.equal('Please enter a mountain range value');
+            done()
           });
     });
   });

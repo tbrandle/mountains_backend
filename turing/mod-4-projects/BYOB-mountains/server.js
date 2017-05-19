@@ -141,17 +141,26 @@ app.post('/api/v1/mountains', checkAuth, (req, res) => {
           throw 'Please post the mountain range before posting the mountain';
         }
       });
+  } else {
+    res.status(422).send({
+      success: false,
+      message: "Please include at least a mountain and a mountain range",
+    });
   }
 });
 
 app.post('/api/v1/ranges', checkAuth, (req, res) => {
-  const range = req.body;
-  database('range').insert(range, 'id')
-    .then(rangeId => res.status(201).json({ id: rangeId[0] }))
-    .catch(error => res.status(422).send({
+  const { range } = req.body;
+  if (range.range) {
+    database('range').insert(range, 'id')
+      .then(rangeId => res.status(201).json({ id: rangeId[0] }))
+      .catch((error) => console.log(error))
+  } else {
+    res.status(422).send({
       success: false,
-      message: error.message,
-    }));
+      message: 'Please enter a mountain range value'
+    });
+  }
 });
 
 app.patch('/api/v1/mountains', checkAuth, (req, res) => {
