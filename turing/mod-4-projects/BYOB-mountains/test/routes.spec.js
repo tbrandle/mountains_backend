@@ -123,6 +123,8 @@ describe('test server side routes', () => {
     })
   })
 
+
+//  tests failing due to stubbed token in .env
   describe('POST Routes', () => {
     it('POST /api/v1/mountains', (done) => {
         chai.request(server)
