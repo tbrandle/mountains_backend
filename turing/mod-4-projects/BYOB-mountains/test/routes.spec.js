@@ -123,5 +123,22 @@ describe('test server side routes', () => {
     })
   })
 
+  describe('POST Routes', () => {
+    it('POST /api/v1/mountains', (done) => {
+        chai.request(server)
+          .post('/api/v1/mountains')
+          .set('Authorization', process.env.TOKEN)
+          .send({
+            mountain: "test mountain",
+            range: "mount something",
+            range_id: 4
+          })
+          .end((err, response) => {
+            response.should.have.status(201);
+            done()
+          })
+    })
+
+  })
 
 })

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken')
 const config = require('dotenv').config().parsed;
 
-
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
@@ -25,35 +24,35 @@ app.listen(app.get('port'), () => {
 
 const checkAuth = (request, response, next) => {
   const token = request.body.token ||
-                request.param('token') ||
+                request.params.token ||
                 request.headers['authorization'];
 
   if (token) {
     jwt.verify(token, app.get('secretKey'), (error, decoded) => {
-        // If the token is invalid or expired, respond with an error
         if (error) {
           return response.status(403).send({
             success: false,
             message: 'Invalid authorization token.'
           });
-        }
-
-        // If the token is valid, save the decoded version to the
-        // request for use in other routes & continue on with next()
-        else {
+        } else {
           request.decoded = decoded;
           next();
         }
       });
-  }
-
-  else {
+  } else {
     return response.status(403).send({
       success: false,
       message: 'You must be authorized to hit this endpoint'
     });
   }
 };
+
+const insertNewMountain = (mountain, rangeId, res) => {
+  const newMountain = Object.assign({}, mountain, { range_id: rangeId })
+  database('mountains').insert(newMountain, 'id')
+    .then(mountain => res.status(201).json({ id: mountain[0] }))
+    .catch(error=> console.log(error))
+}
 
 /********** GET ************/
 
@@ -77,7 +76,6 @@ app.get('/api/v1/ranges', (req, res) => {
 })
 
 app.get('/api/v1/:id/mountain', (req, res) => {
-  console.log(req.params);
   database('mountains').where('id', req.params.id).select()
     .then(mountain => res.status(200).json(mountain))
     .catch(error => console.log(error))
@@ -90,6 +88,9 @@ app.get('/api/v1/:id/mountain_range', (req, res) => {
 })
 
 /********** POST ************/
+
+let token = jwt.sign('user', app.get('secretKey'))
+console.log(token);
 
 app.post('/authenticate', (request, response) => {
   const user = request.body;
@@ -106,6 +107,8 @@ app.post('/authenticate', (request, response) => {
       expiresIn: 172800 // expires in 48 hours
     });
 
+
+
     response.json({
       success: true,
       username: user.username,
@@ -116,9 +119,16 @@ app.post('/authenticate', (request, response) => {
 
 app.post('/api/v1/mountains', checkAuth, (req, res) => {
   const { mountain } = req.body
-  database('mountains').insert(mountain, 'id')
-    .then(mountain => res.status(201).json({ id: mountain[0] }))
-    .catch(error=> console.log(error))
+  if (mountain.mountain && mountain.range) {
+    database('range').whereRaw('LOWER(range) LIKE ?', mountain.range.toLowerCase()).select()
+      .then(rangeSelect => {
+        if (rangeSelect.length) {
+          insertNewMountain(mountain, rangeSelect[0].id, res)
+        } else {
+          throw "Please post the mountain range before posting the mountain"
+        }
+      })
+    }
 })
 
 app.post('/api/v1/ranges', checkAuth, (req, res) => {
